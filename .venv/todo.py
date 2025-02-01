@@ -21,12 +21,14 @@ while True:
             print(add + " was added to the list." + "\n")
 
         elif answer.startswith("Modify"):
-            modify = input("Which task do you want to modify?:").capitalize()
+            for index, todo in enumerate(todos):
+                print(index + 1, "-", todo)
+            modify = int(input("Which task do you want to modify?:").capitalize())
             todos.pop(modify)
 
             newTodo = input("Please enter a new task:").capitalize()
             todos.insert(modify, newTodo)
-            print(modify + " was modified." + "\n")
+            print(newTodo + " was added." + "\n")
 
         elif answer.startswith("Delete"):
             delete = input("Which task do you want to delete?:").capitalize()
@@ -38,3 +40,6 @@ while True:
 
     except ValueError:
         print("Invalid input")
+
+    except IndexError:
+        print("Invalid index")
