@@ -1,5 +1,3 @@
-todos = []
-
 while True:
     try:
         answer = (input("What do you want to do?: " + "\n"
@@ -10,29 +8,34 @@ while True:
                         + "Exit" + "\n")).capitalize()
 
         if answer.startswith("Show"):
-            for todo in todos:
+            with open("todo_tasks.txt", "r") as file:
+                todo = file.readlines()
                 print(todo)
 
             print("\n")
 
         elif answer.startswith("Add"):
             add = input("Please enter your task:").capitalize()
-            todos.append(add)
+
+            with open("todo_tasks.txt", "w") as file:
+                write = file.writelines(add)
+
             print(add + " was added to the list." + "\n")
 
+        # Work in progress..
         elif answer.startswith("Modify"):
-            for index, todo in enumerate(todos):
-                print(index + 1, "-", todo)
+
             modify = int(input("Which task do you want to modify?:").capitalize())
-            todos.pop(modify)
+
 
             newTodo = input("Please enter a new task:").capitalize()
-            todos.insert(modify, newTodo)
+
             print(newTodo + " was added." + "\n")
 
+        # Work in progress..
         elif answer.startswith("Delete"):
             delete = input("Which task do you want to delete?:").capitalize()
-            todos.remove(delete)
+
             print(delete + " was deleted from the list." + "\n")
 
         elif answer.startswith("Exit"):
