@@ -9,18 +9,19 @@ while True:
 
         if answer.startswith("Show"):
             with open("todo_tasks.txt", "r") as file:
-                todo = file.readlines()
-                print(todo)
+                todo = file.read().strip()
 
+            print(todo if todo else "Lista jest pusta.")
             print("\n")
 
         elif answer.startswith("Add"):
             add = input("Please enter your task:").capitalize()
 
-            with open("todo_tasks.txt", "w") as file:
-                write = file.writelines(add)
+            with open("todo_tasks.txt", "a") as file:
+                file.write(add + "\n")
 
             print(add + " was added to the list." + "\n")
+            file.close()
 
         # Work in progress..
         elif answer.startswith("Modify"):
