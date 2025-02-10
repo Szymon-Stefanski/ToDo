@@ -8,7 +8,7 @@ while True:
                         + "Exit" + "\n")).capitalize()
 
         if answer.startswith("Show"):
-            with open("todo_tasks.txt", "r") as file:
+            with open(".venv/todo_tasks.txt", "r") as file:
                 todo = file.read().strip()
 
             print(todo if todo else "Lista jest pusta.")
@@ -17,7 +17,7 @@ while True:
         elif answer.startswith("Add"):
             add = input("Please enter your task:").capitalize()
 
-            with open("todo_tasks.txt", "a") as file:
+            with open(".venv/todo_tasks.txt", "a") as file:
                 file.write(add + "\n")
 
             print(add + " was added to the list." + "\n")
