@@ -23,12 +23,22 @@ while True:
             print(add + " was added to the list." + "\n")
             file.close()
 
-        # Work in progress..
         elif answer.startswith("Modify"):
+            modify = input("Which task do you want to modify?:").capitalize()
 
-            modify = int(input("Which task do you want to modify?:").capitalize())
+            with open("todo_tasks.txt", "r") as file:
+                tasks = file.readlines()
+
+            with open("todo_tasks.txt", "w") as file:
+                for task in tasks:
+                    if task.strip() != modify:
+                        file.write(task)
 
             newTodo = input("Please enter a new task:").capitalize()
+
+            with open("todo_tasks.txt", "a") as file:
+                file.write(newTodo + "\n")
+
 
             print(newTodo + " was added." + "\n")
 
