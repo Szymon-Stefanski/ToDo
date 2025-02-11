@@ -8,7 +8,7 @@ while True:
                         + "Exit" + "\n")).capitalize()
 
         if answer.startswith("Show"):
-            with open(".venv/todo_tasks.txt", "r") as file:
+            with open("todo_tasks.txt", "r") as file:
                 todo = file.read().strip()
 
             print(todo if todo else "Lista jest pusta.")
@@ -17,7 +17,7 @@ while True:
         elif answer.startswith("Add"):
             add = input("Please enter your task:").capitalize()
 
-            with open(".venv/todo_tasks.txt", "a") as file:
+            with open("todo_tasks.txt", "a") as file:
                 file.write(add + "\n")
 
             print(add + " was added to the list." + "\n")
@@ -28,16 +28,22 @@ while True:
 
             modify = int(input("Which task do you want to modify?:").capitalize())
 
-
             newTodo = input("Please enter a new task:").capitalize()
 
             print(newTodo + " was added." + "\n")
 
-        # Work in progress..
         elif answer.startswith("Delete"):
-            delete = input("Which task do you want to delete?:").capitalize()
+            delete = input("Which task do you want to delete?: ").capitalize()
 
-            print(delete + " was deleted from the list." + "\n")
+            with open("todo_tasks.txt", "r") as file:
+                tasks = file.readlines()
+
+            with open("todo_tasks.txt", "w") as file:
+                for task in tasks:
+                    if task.strip() != delete:
+                        file.write(task)
+
+            print(delete + " was deleted from the list.\n")
 
         elif answer.startswith("Exit"):
             break
