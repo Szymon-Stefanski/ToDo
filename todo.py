@@ -1,3 +1,5 @@
+import options
+
 while True:
     try:
         answer = (input("What do you want to do?: " + "\n"
@@ -8,54 +10,19 @@ while True:
                         + "Exit" + "\n")).capitalize()
 
         if answer.startswith("Show"):
-            with open("todo_tasks.txt", "r") as file:
-                todo = file.read().strip()
-
-            print(todo if todo else "Lista jest pusta.")
-            print("\n")
+            options.Show()
 
         elif answer.startswith("Add"):
-            add = input("Please enter your task:").capitalize()
-
-            with open("todo_tasks.txt", "a") as file:
-                file.write(add + "\n")
-
-            print(add + " was added to the list." + "\n")
-            file.close()
+            options.Add()
 
         elif answer.startswith("Modify"):
-            modify = input("Which task do you want to modify?:").capitalize()
-
-            with open("todo_tasks.txt", "r") as file:
-                tasks = file.readlines()
-
-            with open("todo_tasks.txt", "w") as file:
-                for task in tasks:
-                    if task.strip() != modify:
-                        file.write(task)
-
-            newTodo = input("Please enter a new task:").capitalize()
-
-            with open("todo_tasks.txt", "a") as file:
-                file.write(newTodo + "\n")
-
-
-            print(newTodo + " was added." + "\n")
+            options.Modify()
 
         elif answer.startswith("Delete"):
-            delete = input("Which task do you want to delete?: ").capitalize()
-
-            with open("todo_tasks.txt", "r") as file:
-                tasks = file.readlines()
-
-            with open("todo_tasks.txt", "w") as file:
-                for task in tasks:
-                    if task.strip() != delete:
-                        file.write(task)
-
-            print(delete + " was deleted from the list.\n")
+            options.Delete()
 
         elif answer.startswith("Exit"):
+            options.Exit()
             break
 
     except ValueError:
