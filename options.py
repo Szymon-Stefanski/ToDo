@@ -1,4 +1,4 @@
-def Show():
+def show():
     with open("todo_tasks.txt", "r") as file:
         todo = file.read().strip()
 
@@ -6,25 +6,25 @@ def Show():
     print("\n")
 
 
-def Add():
-    add = input("Please enter your task:").capitalize()
+def add(answer):
+    answer = answer.capitalize()
 
     with open("todo_tasks.txt", "a") as file:
-        file.write(add + "\n")
+        file.write(answer + "\n")
 
-    print(add + " was added to the list." + "\n")
+    print(answer + " was added to the list." + "\n")
     file.close()
 
 
-def Modify():
-    modify = input("Which task do you want to modify?:").capitalize()
+def modify(answer):
+    answer = answer.capitalize()
 
     with open("todo_tasks.txt", "r") as file:
         tasks = file.readlines()
 
     with open("todo_tasks.txt", "w") as file:
         for task in tasks:
-            if task.strip() != modify:
+            if task.strip() != answer:
                 file.write(task)
 
     newTodo = input("Please enter a new task:").capitalize()
@@ -35,19 +35,19 @@ def Modify():
     print(newTodo + " was added." + "\n")
 
 
-def Delete():
-    delete = input("Which task do you want to delete?: ").capitalize()
+def delete(answer):
+    answer = answer.capitalize()
 
     with open("todo_tasks.txt", "r") as file:
         tasks = file.readlines()
 
     with open("todo_tasks.txt", "w") as file:
         for task in tasks:
-            if task.strip() != delete:
+            if task.strip() != answer:
                 file.write(task)
 
-    print(delete + " was deleted from the list.\n")
+    print(answer + " was deleted from the list.\n")
 
-def Exit():
+def exit():
     with open("todo_tasks.txt", "w") as file:
         file.write('')

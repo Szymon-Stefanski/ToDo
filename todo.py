@@ -10,19 +10,22 @@ while True:
                         + "Exit" + "\n")).capitalize()
 
         if answer.startswith("Show"):
-            options.Show()
+            options.show()
 
         elif answer.startswith("Add"):
-            options.Add()
+            action = input("Please enter your task:")
+            options.add(action)
 
         elif answer.startswith("Modify"):
-            options.Modify()
+            action = input("Which task do you want to modify?:")
+            options.modify(action)
 
         elif answer.startswith("Delete"):
-            options.Delete()
+            action = input("Which task do you want to delete?: ")
+            options.delete(action)
 
         elif answer.startswith("Exit"):
-            options.Exit()
+            options.exit()
             break
 
     except ValueError:
