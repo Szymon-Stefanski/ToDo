@@ -9,11 +9,15 @@ def show():
 def add(answer):
     answer = answer.capitalize()
 
-    with open("todo_tasks.txt", "a") as file:
-        file.write(answer + "\n")
+    with open("todo_tasks.txt", "r") as file:
+        tasks = [task.strip() for task in file.readlines()]
 
-    print(answer + " was added to the list." + "\n")
-    file.close()
+    if answer not in tasks:
+        with open("todo_tasks.txt", "a") as file:
+            file.write(answer + "\n")
+        print(answer + " was added to the list." + "\n")
+    else:
+        print("WARNING!: " + answer + " is already in the list." + "\n")
 
 
 def modify(answer):
@@ -27,12 +31,12 @@ def modify(answer):
             if task.strip() != answer:
                 file.write(task)
 
-    newTodo = input("Please enter a new task:").capitalize()
+    new_todo = input("Please enter a new task:").capitalize()
 
     with open("todo_tasks.txt", "a") as file:
-        file.write(newTodo + "\n")
+        file.write(new_todo + "\n")
 
-    print(newTodo + " was added." + "\n")
+    print(new_todo + " was added." + "\n")
 
 
 def delete(answer):
@@ -45,8 +49,8 @@ def delete(answer):
         for task in tasks:
             if task.strip() != answer:
                 file.write(task)
+            print(answer + " was deleted from the list.\n")
 
-    print(answer + " was deleted from the list.\n")
 
 def exit():
     with open("todo_tasks.txt", "w") as file:
