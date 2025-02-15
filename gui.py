@@ -32,6 +32,8 @@ while True:
                 options.add(task)
                 window["todos"].update(values=options.show())
                 window["task_input"].update("")
+            else:
+                FreeSimpleGUI.popup("Input box is empty! Insert name of an item to add!")
 
         case "Modify":
             selected_task = values["todos"]
@@ -40,11 +42,15 @@ while True:
                 if new_task:
                     options.modify(selected_task[0], new_task)
                     window["todos"].update(values=options.show())
+            else:
+                FreeSimpleGUI.popup("Please select an item to modify first!")
 
         case "Delete":
             selected_task = values["todos"]
             if selected_task:
                 options.delete(selected_task[0])
                 window["todos"].update(values=options.show())
+            else:
+                FreeSimpleGUI.popup("Please select an item to delete first!")
 
 window.close()
