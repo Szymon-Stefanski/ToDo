@@ -2,14 +2,16 @@ import options
 import FreeSimpleGUI
 
 
+FreeSimpleGUI.theme("Reddit")
+
 label = FreeSimpleGUI.Text("What do you want to do?")
 input_box = FreeSimpleGUI.InputText(key="task_input")
 list_box = FreeSimpleGUI.Listbox(values=options.show(), key="todos", enable_events=True, size=(45, 15))
 
-add_button = FreeSimpleGUI.Button("Add")
-modify_button = FreeSimpleGUI.Button("Modify")
-delete_button = FreeSimpleGUI.Button("Delete")
-exit_button = FreeSimpleGUI.Button("Exit")
+add_button = FreeSimpleGUI.Button("Add", size=10)
+modify_button = FreeSimpleGUI.Button("Modify", size=10)
+delete_button = FreeSimpleGUI.Button("Delete", size=10)
+exit_button = FreeSimpleGUI.Button("Exit", size=10)
 
 
 window = FreeSimpleGUI.Window(
@@ -33,7 +35,7 @@ while True:
                 window["todos"].update(values=options.show())
                 window["task_input"].update("")
             else:
-                FreeSimpleGUI.popup("Input box is empty! Insert name of an item to add!")
+                FreeSimpleGUI.popup("Input box is empty! Insert name of an item to add!", font=("Arial",12))
 
         case "Modify":
             selected_task = values["todos"]
@@ -43,7 +45,7 @@ while True:
                     options.modify(selected_task[0], new_task)
                     window["todos"].update(values=options.show())
             else:
-                FreeSimpleGUI.popup("Please select an item to modify first!")
+                FreeSimpleGUI.popup("Please select an item to modify first!", font=("Arial",12))
 
         case "Delete":
             selected_task = values["todos"]
@@ -51,6 +53,6 @@ while True:
                 options.delete(selected_task[0])
                 window["todos"].update(values=options.show())
             else:
-                FreeSimpleGUI.popup("Please select an item to delete first!")
+                FreeSimpleGUI.popup("Please select an item to delete first!", font=("Arial",12))
 
 window.close()
