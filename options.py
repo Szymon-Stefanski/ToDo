@@ -1,57 +1,43 @@
+TODO_FILE = "todo_tasks.txt"
+
 def show():
-    with open("todo_tasks.txt", "r") as file:
-        todo = file.read().strip()
+    try:
+        with open(TODO_FILE, "r") as file:
+            return [task.strip() for task in file.readlines()]
+    except FileNotFoundError:
+        return []
 
-    print(todo if todo else "Lista jest pusta.")
-    print("\n")
+def add(task):
+    task = task.capitalize()
+    tasks = show()
 
-
-def add(answer):
-    answer = answer.capitalize()
-
-    with open("todo_tasks.txt", "r") as file:
-        tasks = [task.strip() for task in file.readlines()]
-
-    if answer not in tasks:
-        with open("todo_tasks.txt", "a") as file:
-            file.write(answer + "\n")
-        print(answer + " was added to the list." + "\n")
+    if task not in tasks:
+        with open(TODO_FILE, "a") as file:
+            file.write(task + "\n")
+        print(f"{task} was added to the list.\n")
     else:
-        print("WARNING!: " + answer + " is already in the list." + "\n")
+        print(f"WARNING!: {task} is already in the list.\n")
 
+def modify(old_task, new_task):
+    old_task, new_task = old_task.capitalize(), new_task.capitalize()
+    tasks = show()
 
-def modify(answer):
-    answer = answer.capitalize()
-
-    with open("todo_tasks.txt", "r") as file:
-        tasks = file.readlines()
-
-    with open("todo_tasks.txt", "w") as file:
+    with open(TODO_FILE, "w") as file:
         for task in tasks:
-            if task.strip() != answer:
-                file.write(task)
+            file.write(new_task + "\n" if task == old_task else task + "\n")
 
-    new_todo = input("Please enter a new task:").capitalize()
+    print(f"{old_task} was modified to {new_task}.\n")
 
-    with open("todo_tasks.txt", "a") as file:
-        file.write(new_todo + "\n")
+def delete(task):
+    task = task.capitalize()
+    tasks = show()
 
-    print(new_todo + " was added." + "\n")
+    with open(TODO_FILE, "w") as file:
+        for t in tasks:
+            if t != task:
+                file.write(t + "\n")
 
+    print(f"{task} was deleted from the list.\n")
 
-def delete(answer):
-    answer = answer.capitalize()
-
-    with open("todo_tasks.txt", "r") as file:
-        tasks = file.readlines()
-
-    with open("todo_tasks.txt", "w") as file:
-        for task in tasks:
-            if task.strip() != answer:
-                file.write(task)
-            print(answer + " was deleted from the list.\n")
-
-
-def exit():
-    with open("todo_tasks.txt", "w") as file:
-        file.write('')
+def exit_program():
+    print("Exiting program...")
