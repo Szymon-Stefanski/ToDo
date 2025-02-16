@@ -6,7 +6,13 @@ A simple To-Do List project using Python and PySimpleGUI.
 
 Install dependencies before running:
 
+### GUI:
+
 pip install PySimpleGUI
+
+### Web app:
+
+pip install streamlit
 
 ## Features
 
